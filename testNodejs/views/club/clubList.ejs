@@ -5,7 +5,12 @@
    </head>
 
 <body>
-
+	<script>
+		function fnInsertView(){
+			location.href='/club/insertView';
+		}
+	</script>
+	
 	<p>js data : <%=data%></p>
 	
 	<section id="mberClubListSection">
@@ -27,7 +32,7 @@
 		<% } %>
 		
 		<hr/>
-		<button style="border:right;">신규</button>
+		<button onclick="fnInsertView();">신규</button>
 	</section>
 </body>
 </html>

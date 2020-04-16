@@ -11,6 +11,7 @@ var clubList = {
 				console.log("err : " + err);
 				console.log("field : " + field);
 				console.log("results : " + results);
+				console.log("클럽 LIST 조회 끝");
 				res.render('club/clubList', {data: 'MySQL 조회 테스트 EJS', clubList : results});
 			});
 		}

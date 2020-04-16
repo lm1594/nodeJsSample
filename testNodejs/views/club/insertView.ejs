@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+   <head>
+   		<title>테스트 노드JS</title>
+   		
+   		<!-- 제이쿼리 불러오기 -->
+   		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+   		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+   </head>
+<body>
+	<script>
+		function fnInsert () {
+			if(confirm('신규 생성 하시겠습니까?')) {
+				
+				$.ajax({
+					url: "/club/insert",
+					async: true,
+					type: "post",
+					data: $("#form1").serialize(),
+					dataType: "json",
+					success: function(result) {
+						console.log(result);
+						if(result.code > 0) {
+							alert('오류 발생 : ' + result);
+							return;
+						}
+						location.href="/club/list";
+					},
+					error: function(err) {
+						alert("오류 발생 : " + err);
+						console.log(err);
+					}
+				});
+			}
+			
+		}
+	</script>
+	<p>js data : <%=data%></p>
+	
+	<form id="form1">
+		<section id="mberClubListSection">
+			클럽 명 : <input type="text" id="clubNm" name="clubNm">
+			
+			<hr/>
+			<button onclick="fnInsert();">저장</button>
+		</section>
+	</form>
+</body>
+</html>

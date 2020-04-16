@@ -1,6 +1,7 @@
 // 필요한 모듈 선언
 var express = require('express');
 var http 	= require('http');
+var bodyParser = require('body-parser');
 var app		= express();
 
 // express 서버 포트 설정(cafe24 호스팅 서버는 8001 포트 사용)
@@ -10,6 +11,10 @@ app.set('port', process.env.PORT || 8001);
 app.set('views', __dirname+'/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
+
+// BodyParser 설정
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 // 서버생성
 http.createServer(app, function(req,res) {

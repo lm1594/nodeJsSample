@@ -11,6 +11,7 @@ var router  = express.Router();
  */
 var clubList	= require('./clubList');		// 클럽목록
 var clubDetail  = require('./clubDetail');		// 클럽상세
+var clubInsert  = require('./clubInsert');		// 클럽신규
 
 router.get('/list', function(req, res, next) {
 	clubList.list(req, res);
@@ -18,6 +19,15 @@ router.get('/list', function(req, res, next) {
 
 router.get('/detail/:clubSn', function(req, res, next) {
 	clubDetail.detail(req, res);
+});
+
+router.get('/insertView', function(req, res, next) {
+	clubInsert.insertView(req, res);
+});
+
+router.post('/insert', function(req, res, next) {
+	console.log(req.body);
+	clubInsert.insert(req, res);
 });
 
 module.exports = router;
