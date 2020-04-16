@@ -11,6 +11,7 @@ var clubDetail = {
 				console.log("err : " + err);
 				console.log("field : " + field);
 				console.log("results : " + results);
+				console.log("상세조회 종료");
 				res.render('club/clubDetail', {data: 'MySQL 상세 조회 테스트 EJS', clubDetail : results});
 			});
 		}

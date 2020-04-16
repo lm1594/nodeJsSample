@@ -2,35 +2,70 @@
 <html lang="ko">
    <head>
    		<title>테스트 노드JS</title>
+   		<!-- 제이쿼리 불러오기 -->
+   		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+   		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
    </head>
 
 <body>
-
+	<script>
+		function fnDelete(){
+			if(confirm('삭제하시겠습니까?')) {
+				
+				$.ajax({
+					url: "/club/clubDel",
+					async: true,
+					type: "post",
+					data: $("#form1").serialize(),
+					dataType: "json",
+					success: function(result) {
+						console.log(result);
+						if(result.code > 0) {
+							alert('오류 발생1 : ' + result);
+							console.log(result);
+							return;
+						}
+						alert("정상 처리되었습니다.");
+						location.href="/club/list";
+					},
+					error: function(err) {
+						alert("오류 발생2 : " + err);
+						console.log(err);
+					}
+				});
+			}
+			
+		}
+	</script>
 	<p>js data : <%=data%></p>
 	
-	<section id="mberClubListSection">
-		<h3>클럽 상세보기</h3>
-		<!-- List 형태는 의미에 맞게 <ul><li>태그 이용 -->
-		<% if(clubDetail != null && clubDetail.length > 0){ %>
-		<ul class="band-club-list">
-			<% for ( var i = 0; i < clubDetail.length; i++){ %>
-				<!-- href를 이용해서 페이지 이동시  data-ajax="false" 를 추가해줘야 함. 그렇지 않으면 ajax형태로 가져온 데이터(화면)을 추가함.-->
-				<li style="list-style-type: none;">
-					<div>클럽 번호 : <%=clubDetail[i].CLUB_SN%></div>
-				</li>
-				<br/>
-				<li style="list-style-type: none;">
-					<div>클럽 명 : <%=clubDetail[i].CLUB_NM%></div>
-				</li>
+	<form id="form1">
+		<input type="hidden" id="clubSn" name="clubSn" value="<%=clubDetail[0].CLUB_SN%>" />
+		<section id="mberClubListSection">
+			<h3>클럽 상세보기</h3>
+			<!-- List 형태는 의미에 맞게 <ul><li>태그 이용 -->
+			<% if(clubDetail != null && clubDetail.length > 0){ %>
+			<ul class="band-club-list">
+				<% for ( var i = 0; i < clubDetail.length; i++){ %>
+					<!-- href를 이용해서 페이지 이동시  data-ajax="false" 를 추가해줘야 함. 그렇지 않으면 ajax형태로 가져온 데이터(화면)을 추가함.-->
+					<li style="list-style-type: none;">
+						<div>클럽 번호 : <%=clubDetail[i].CLUB_SN%></div>
+					</li>
+					<br/>
+					<li style="list-style-type: none;">
+						<div>클럽 명 : <%=clubDetail[i].CLUB_NM%></div>
+					</li>
+				<% } %>
+			</ul>
+			<% }else{ %>
+			<p>해당 번호의 클럽이 없습니다. </p>
 			<% } %>
-		</ul>
-		<% }else{ %>
-		<p>해당 번호의 클럽이 없습니다. </p>
-		<% } %>
-		
-		<hr/>
-		
-		<button onclick="location.href='/club/list';">목록</button>
-	</section>
+			
+			<hr/>
+			
+			<button onclick="fnDelete();">삭제</button>
+			<button onclick="location.href='/club/list';">목록</button>
+		</section>
+	</form>
 </body>
 </html>
