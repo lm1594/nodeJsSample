@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+   <head>
+   		<title>테스트 노드JS</title>
+   </head>
+
+<body>
+
+	<p>js data : <%=data%></p>
+	
+	<section id="mberClubListSection">
+		<h3>클럽 상세보기</h3>
+		<!-- List 형태는 의미에 맞게 <ul><li>태그 이용 -->
+		<% if(clubDetail != null && clubDetail.length > 0){ %>
+		<ul class="band-club-list">
+			<% for ( var i = 0; i < clubDetail.length; i++){ %>
+				<!-- href를 이용해서 페이지 이동시  data-ajax="false" 를 추가해줘야 함. 그렇지 않으면 ajax형태로 가져온 데이터(화면)을 추가함.-->
+				<li style="list-style-type: none;">
+					<div>클럽 번호 : <%=clubDetail[i].CLUB_SN%></div>
+				</li>
+				<br/>
+				<li style="list-style-type: none;">
+					<div>클럽 명 : <%=clubDetail[i].CLUB_NM%></div>
+				</li>
+			<% } %>
+		</ul>
+		<% }else{ %>
+		<p>해당 번호의 클럽이 없습니다. </p>
+		<% } %>
+		
+		<hr/>
+		
+		<button onclick="location.href='/club/list';">목록</button>
+	</section>
+</body>
+</html>
